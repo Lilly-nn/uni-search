@@ -11,7 +11,7 @@ function SearchSelect({visible, setSelectValue}) {
     <select onChange={onChange}>     
         <option value= 'name'>Uni name</option>
         <option value='country'>Country</option>
-   
+        <option value='country, name'>Country, Uni name</option>
     </select>
     </div>
  

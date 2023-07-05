@@ -13,7 +13,7 @@ export default class SearchService {
         return data;
     }
     static async getUnivercitiesByKeywords(searchQuery1, searchQuery2) {
-        const url = `http://universities.hipolabs.com/search?name=${searchQuery1}&&country=${searchQuery2}`;
+        const url = `http://universities.hipolabs.com/search?country=${searchQuery1}&&name=${searchQuery2}`;
         const result = await fetch(url);
         const data = await result.json();
         return data;
