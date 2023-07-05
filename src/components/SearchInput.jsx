@@ -18,7 +18,8 @@ function SearchInput() {
         if(selectValue ==="country, name") {
             const keywords = value.split(" ");
             const unis = await SearchService.getUnivercitiesByKeywords(keywords[0], keywords[1]);
-            console.log(unis);
+            setUniversities(unis);
+            navigate(`/universities/${keywords}`);
             setLoading(false);
             return;
         }
@@ -26,7 +27,7 @@ function SearchInput() {
         if(unis) {
              navigate(`/universities/${value}`)
         }
-       setLoading(false);
+        setLoading(false);
         console.log(unis);
         setUniversities(unis)
     }
