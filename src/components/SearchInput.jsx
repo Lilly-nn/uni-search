@@ -1,25 +1,34 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import SearchService from '../API/SearchService';
 import SearchSelect from './SearchSelect';
 import { useNavigate } from 'react-router-dom';
+import { UnisContext } from '../context';
 
 function SearchInput() {
+  const {universities, setUniversities} = useContext(UnisContext);
+  const [loading, setLoading] = useState(false);
   const [selectVisible, setSelectVisible] = useState(false);
   const [selectValue, setSelectValue] = useState('name');
   const [value, setValue] = useState('');
   const navigate = useNavigate();
 
   async function search(e) {
+    setLoading(true);
     if(e.code === "Enter" && value) {
         if(selectValue ==="country, name") {
             const keywords = value.split(" ");
             const unis = await SearchService.getUnivercitiesByKeywords(keywords[0], keywords[1]);
             console.log(unis);
+            setLoading(false);
             return;
         }
         const unis = await SearchService.getUnivercitiesByKeyword(selectValue, value);
-        navigate(`/universities/${value}`)
+        if(unis) {
+             navigate(`/universities/${value}`)
+        }
+       setLoading(false);
         console.log(unis);
+        setUniversities(unis)
     }
   }
 

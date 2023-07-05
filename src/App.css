@@ -1,0 +1,34 @@
+.uni-item {
+  background: cornsilk;
+  padding: 10px 25px;
+  border-radius: 5px;
+}
+.uni-item__title {
+  color: #8d6f93;
+  width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.uni-item__details span {
+    background: beige;
+    padding: 5px;
+    color: yellowgreen;
+    border-radius: 5px;
+}
+
+.uni-item__btn {
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: bisque;
+    padding: 5px 15px;
+    border: 1px solid powderblue;
+    color: slategray;
+    transition: all .2s ease-out;
+}
+.uni-item__btn:hover {
+     background: rgb(241, 190, 127);
+}
