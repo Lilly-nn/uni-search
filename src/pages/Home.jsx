@@ -15,7 +15,7 @@ function Home() {
             </p>
         </div>
         <SearchInput/> 
-        <Link to="/universities" className='mt-[20px]'>or view all universities at once</Link>
+        <Link to="/universities" className='mt-[20px] block hover:scale-105 transition-all text-lg text-[brown]'>or view all universities at once</Link>
      
     </section>
   )

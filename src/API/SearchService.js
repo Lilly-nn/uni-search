@@ -3,7 +3,8 @@ export default class SearchService {
     static async getAllUniversities () {
         const url = 'http://universities.hipolabs.com/search?';
         const result = await fetch(url);
-        const data = await result.json();
+        let data = await result.json();
+        data = data.slice(0, 51);
         return data;
     }
     static async getUnivercitiesByKeyword(keyword, searchQuery) {
