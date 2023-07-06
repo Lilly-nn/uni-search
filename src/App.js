@@ -6,6 +6,7 @@ import Universities from './pages/Universities';
 import { useState } from 'react';
 import { UnisContext } from './context';
 import AllUniversititesList from './pages/AllUniversititesList';
+import UniversitiesByCountry from './pages/UniversitiesByCountry';
 
 function App() {
   const [universities, setUniversities] = useState([]);
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element = {<Home/>}/>
           <Route path="/universities" element = {<AllUniversititesList/>}/>
+          <Route path="/universities/country/:country" element = {<UniversitiesByCountry/>}/>
           <Route path="/universities/:keyword" element={<Universities/>}/>
         </Routes>
       </BrowserRouter>
