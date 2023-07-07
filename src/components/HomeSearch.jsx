@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UnisContext } from '../context';
 import Loader from './Loader';
 
-function SearchInput() {
+function HomeSearch() {
   const {universities, setUniversities} = useContext(UnisContext);
   const [loading, setLoading] = useState(false);
   const [foundData, setFoundData] = useState(null);
@@ -54,4 +54,4 @@ function SearchInput() {
   )
 }
 
-export default SearchInput
+export default HomeSearch

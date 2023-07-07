@@ -25,7 +25,7 @@ function UniversitiesByCountry() {
   return (
     <section className='min-h-screen bg-slate-200 pt-[7%] '>
         <div className='max-w-5xl mx-auto'>
-            <h3 className='text-3xl text-[forestgreen]'>List of universities for keyword <span className='font-bold italic tracking-widest'>{searchWord}</span></h3>
+            <h3 className='text-3xl text-[forestgreen]'>List of universities for country <span className='font-bold italic tracking-widest'>{searchWord}</span></h3>
             {!loading && (
                 <p className='text-lg'>found<span className='font-bold  px-1 text-xl'>{universities.length}</span>{universities.length > 1 ? "results" : "result"}</p>
             )}

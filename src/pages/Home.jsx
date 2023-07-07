@@ -1,7 +1,6 @@
 import React from 'react'
-import SearchInput from '../components/SearchInput'
-import SearchSelect from '../components/SearchSelect'
 import { Link } from 'react-router-dom'
+import HomeSearch from '../components/HomeSearch'
 
 function Home() {
   return (
@@ -14,7 +13,7 @@ function Home() {
                 On our site you can find thousands of universities which are located in different countries
             </p>
         </div>
-        <SearchInput/> 
+        <HomeSearch/> 
         <Link to="/universities" className='mt-[20px] block hover:scale-105 transition-all text-lg text-[brown]'>or view all universities at once</Link>
      
     </section>

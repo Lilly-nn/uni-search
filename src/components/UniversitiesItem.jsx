@@ -12,7 +12,7 @@ function UniversitiesItem({uni}) {
         <span>{uni.domains}</span>
       </div>
     </div>
-    <Link to = {uni.web_pages[0]} target='_blank' className='uni-item__btn'>view more</Link>
+    <button type='button' className='uni-item__btn'>view more</button>
     </Link>
  
   )
