@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SearchService from '../API/SearchService';
 import UniversitiesList from '../components/UniversitiesList';
 import Loader from '../components/Loader';
@@ -6,7 +6,6 @@ import Search from '../components/Search';
 import useFilter from '../hooks/useFilter';
 import { getPageCount } from '../utils/pages';
 import useCreatePagination from '../hooks/useCreatePagination';
-import { PaginatedItems } from '../components/Pagination';
 
 function AllUniversititesList() {
   const [loading, setLoading] = useState(false);
@@ -14,25 +13,34 @@ function AllUniversititesList() {
   const [reset, setReset] = useState(false);
   const [allData, setAllData] = useState([]);
   const [isSearched, setSearched] = useState(false);
-  const [totalPages, setTotalPages] = useState(0);
-  const [paginatedItems, setPaginatedItems] = useState([]); 
+  const lastElement = useRef();
+  const observer = useRef();
 
   async function fetchAllUnis() {
     setLoading(true);
     const result = await SearchService.getAllUniversities();
-    setListOfUnis(result);
+    setListOfUnis([...listOfUnis, ...result]);
     setLoading(false);
-    setTotalPages(getPageCount(result.length, 10));
     setAllData(structuredClone(result))
-    setPaginatedItems(result.slice(0,11))
   }
 
   useEffect(() => {
     if(!listOfUnis.length) {
           fetchAllUnis();
     }
-
   }, [listOfUnis.length])
+
+  useEffect(() => {
+    if(loading) return;
+    if(observer.current) observer.current.disconnect();
+     const callback = (entries, observer) => {
+      if(entries[0].isIntersecting) {
+        fetchAllUnis()
+      }
+     }
+     observer.current = new IntersectionObserver(callback);
+     observer.current.observe(lastElement.current);
+  }, [loading])
 
   return (
     <section className='min-h-screen bg-slate-200 pt-[7%] '>
@@ -45,14 +53,13 @@ function AllUniversititesList() {
           <Loader/>
         </div>
         )}
-         {!loading && !paginatedItems.length && listOfUnis && listOfUnis.length > 0 &&  <UniversitiesList info = {reset ? allData : listOfUnis}/>}
-        {paginatedItems.length > 0 && <UniversitiesList info = {reset ? allData : paginatedItems}/>}
-    
+         {!loading && listOfUnis && listOfUnis.length > 0 &&  <UniversitiesList info = {reset ? allData : listOfUnis}/>}
          {!listOfUnis.length && isSearched && (<div className='min-h-[40vh] flex justify-center items-center'>
           <span className='text-xl'>no data found</span>
          </div>
+
          )}
-         <PaginatedItems itemsPerPage={10} items={listOfUnis} setItems={setPaginatedItems}/>
+         <div className='bg-gray-600 w-full h-4' ref={lastElement}  onClick={fetchAllUnis}>load</div>
     </section>
   )
 }

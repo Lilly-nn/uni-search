@@ -1,6 +1,6 @@
 
 export default class SearchService {
-    static async getAllUniversities (limit = 250) {
+    static async getAllUniversities (limit = 20) {
         const url = `http://universities.hipolabs.com/search?limit=${limit}`;
         const result = await fetch(url);
         let data = await result.json();
