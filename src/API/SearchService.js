@@ -6,8 +6,8 @@ export default class SearchService {
         let data = await result.json();
         return data;
     }
-    static async getUnivercitiesByKeyword(keyword, searchQuery) {
-        const url = `http://universities.hipolabs.com/search?${keyword}=${searchQuery}`;
+    static async getUnivercitiesByKeyword(keyword, searchQuery, limit =500) {
+        const url = `http://universities.hipolabs.com/search?${keyword}=${searchQuery}&limit=${limit}`;
         const result = await fetch(url);
         const data = await result.json();
         return data;
