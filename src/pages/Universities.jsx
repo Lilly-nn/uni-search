@@ -5,6 +5,7 @@ import UniversitiesList from '../components/UniversitiesList';
 import SearchService from '../API/SearchService';
 import useFilter from '../hooks/useFilter';
 import Loader from '../components/Loader';
+import Search from '../components/Search';
 
 function Universities() {
   const  [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ function Universities() {
         setUniversities(result);
         setLoading(false);
     }else {
-      setUniversities(filtered)
+      setUniversities(filtered);
     }
   }
 
@@ -32,7 +33,10 @@ function Universities() {
     <section className='min-h-screen bg-slate-200 pt-[7%] '>
         <div className='max-w-5xl mx-auto'>
             <h3 className='text-3xl text-[forestgreen]'>List of universities for keyword <span className='font-bold italic tracking-widest'>{searchWord}</span></h3>
-            <p className='text-lg'>found<span className='font-bold  px-1 text-xl'>{universities.length}</span>{universities.length > 1 ? "results" : "result"}</p>
+            {!loading && (
+               <p className='text-lg'>found<span className='font-bold  px-1 text-xl'>{universities.length}</span>{universities.length > 1 ? "results" : "result"}</p>
+            )}
+           
         </div>
         {loading && (
         <div className='flex justify-center items-center mt-4'>

@@ -29,9 +29,11 @@ function HomeSearch() {
             return;
         }
         const unis = await SearchService.getUnivercitiesByKeyword(selectValue, value);
-        if(unis.length > 0) {
-             navigate(`/universities/${value}`)
-        }else {
+        if(unis.length > 0 && selectValue === "country") {
+          navigate(`/universities/country/${value}`)
+        }else if(unis.length > 0) {
+          navigate(`/universities/${value}`)
+        } else {
           setFoundData(false);
           setValue('');
         }

@@ -10,22 +10,22 @@ function AllUniversititesList() {
   const [reset, setReset] = useState(false);
   const [allData, setAllData] = useState([]);
   const [isSearched, setSearched] = useState(false);
-  
-  async function fetchInitialData() {
+ 
+
+  async function fetchAllUnis() {
     setLoading(true);
     const result = await SearchService.getAllUniversities();
     setListOfUnis(result);
-    setLoading(false);
-    setAllData(structuredClone(result))
+    setLoading(false)
+    setAllData(structuredClone(result));
   }
-
+   
   useEffect(() => {
     if(!listOfUnis.length) {
-          fetchInitialData()
+          fetchAllUnis();
     }
-  }, [])
+  }, [listOfUnis.length])
 
-  
 
   return (
     <section className='min-h-screen bg-slate-200 pt-[7%] '>
@@ -38,13 +38,12 @@ function AllUniversititesList() {
           <Loader/>
         </div>
         )}
-         {!loading && listOfUnis && listOfUnis.length > 0 &&  <UniversitiesList info = {reset ? allData : listOfUnis}/>}
+         {!loading && listOfUnis && listOfUnis.length > 0 &&  <UniversitiesList info = { listOfUnis}/>}
          {!listOfUnis.length && isSearched && (<div className='min-h-[40vh] flex justify-center items-center'>
           <span className='text-xl'>no data found</span>
          </div>
 
          )}
-        
     </section>
   )
 }
