@@ -5,7 +5,6 @@ function Search({data, setData, setReset, setSearched, disabled}) {
   const [value, setValue] = useState('');
   const [isSearched, setIsSearched] = useState(null);
   const [visible, setVisible] = useState(false);
-
   function filterItems(info) {
     let filteredItems = [];
     info.map(el => {
@@ -33,7 +32,7 @@ function Search({data, setData, setReset, setSearched, disabled}) {
 
 
   return (
-    <div className='absolute left-0 top-[20%] p-2'>
+    <div className='left-0 top-[20%] p-2 fixed'>
       {!visible && <SlMagnifier onClick={() => setVisible(true)} className='w-[30px] h-[30px] text-gray-400 ml-2 cursor-pointer mb-1'/>}
       {visible && (
         <div className='flex items-end flex-col pt-1'>

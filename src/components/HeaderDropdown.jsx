@@ -8,7 +8,7 @@ function HeaderDropdown({info, name}) {
        {info[name].title}
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        {info[name].items.map(item =>  <Dropdown.Item href={info[name].link + item}>{item}</Dropdown.Item> )}
+        {info[name].items.map(item =>  <Dropdown.Item href={info[name].link + item} key={item}>{item}</Dropdown.Item> )}
       </Dropdown.Menu>
     </Dropdown>
   )
