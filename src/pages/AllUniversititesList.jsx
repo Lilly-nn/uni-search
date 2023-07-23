@@ -4,6 +4,7 @@ import UniversitiesList from '../components/UniversitiesList';
 import Loader from '../components/Loader';
 import Search from '../components/Search';
 import Observer from '../components/Observer';
+import {BsArrowUpSquare} from "react-icons/bs";
 import ArrowUp from '../components/ArrowUp';
 
 function AllUniversititesList() {
@@ -21,7 +22,7 @@ function AllUniversititesList() {
     setLoading(false)
     setAllData(structuredClone(result));
   }
-  
+   
   useEffect(() => {
     if(!listOfUnis.length) {
           fetchAllUnis();
