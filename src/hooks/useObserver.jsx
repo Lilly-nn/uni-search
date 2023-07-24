@@ -5,8 +5,9 @@ export default function useObserver(ref, callback, dependecies) {
     const observer = useRef();
 
     useEffect(() => {
+       if(!ref.current) return;
        function observerCallback(entries) {
-           if(entries[0].isIntersecting) {
+           if(entries[0].isIntersecting && ref.current) {
               callback()
            }
        }
@@ -17,5 +18,5 @@ export default function useObserver(ref, callback, dependecies) {
       return () => {
         observer.current.disconnect();
       }
-     }, [dependecies])
+     }, dependecies)
 }

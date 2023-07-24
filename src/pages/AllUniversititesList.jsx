@@ -6,6 +6,7 @@ import Search from '../components/Search';
 import Observer from '../components/Observer';
 import {BsArrowUpSquare} from "react-icons/bs";
 import ArrowUp from '../components/ArrowUp';
+import useObserver from '../hooks/useObserver';
 
 function AllUniversititesList() {
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,8 @@ function AllUniversititesList() {
   const [allData, setAllData] = useState([]);
   const [isSearched, setSearched] = useState(false);
   const [limit, setLimit] = useState(21); 
- 
+  const lastElement = useRef();
+
   async function fetchAllUnis() {
     setLoading(true);
     const result = await SearchService.getAllUniversities();
@@ -29,6 +31,8 @@ function AllUniversititesList() {
     }
   }, [listOfUnis.length])
 
+  useObserver(lastElement, () => setLimit(limit + 20), [lastElement.current,limit])
+
   useEffect(() => {
     if(reset) {
       setListOfUnis(allData);
@@ -36,6 +40,10 @@ function AllUniversititesList() {
       setSearched(false);
     }
   }, [reset])
+
+  useEffect(() => {
+    console.log(limit)
+  }, [limit])
 
   return (
     <section className='min-h-screen bg-slate-200 pt-[7%] '>
@@ -56,7 +64,9 @@ function AllUniversititesList() {
           <span className='text-xl'>no data found</span>
          </div>
          )}
-         {!loading && !isSearched && limit <= listOfUnis.length && <Observer setLimit={setLimit} limit={limit}/>}
+          {!loading && !isSearched && limit <= listOfUnis.length && (
+              <div className='flex justify-center' ref={lastElement}><Loader/></div>
+          )}
         <ArrowUp/>
     </section>
   )
