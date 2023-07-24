@@ -31,7 +31,8 @@ function AllUniversititesList() {
     }
   }, [listOfUnis.length])
 
-  useObserver(lastElement, () => setLimit(limit + 20), [lastElement.current,limit])
+  
+  useObserver(lastElement, () => setLimit(limit + 20), [lastElement.current, limit, isSearched])
 
   useEffect(() => {
     if(reset) {
@@ -40,10 +41,6 @@ function AllUniversititesList() {
       setSearched(false);
     }
   }, [reset])
-
-  useEffect(() => {
-    console.log(limit)
-  }, [limit])
 
   return (
     <section className='min-h-screen bg-slate-200 pt-[7%] '>
